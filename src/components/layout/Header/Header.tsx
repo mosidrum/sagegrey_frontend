@@ -61,10 +61,10 @@ export function Header() {
 
   return (
     <header className={styles.header}>
-      <Flex align="center" justify="space-between" className={styles.container}>
+      <Flex align="center" justify="between" className={styles.container}>
         <Text
           as="h1"
-          variant="lg"
+          variant="h2"
           weight="bold"
           className={styles.logo}
         >
@@ -100,7 +100,7 @@ export function Header() {
 
           {showDropdown && (
             <Box className={styles.dropdown}>
-              <Text variant="xs" color="muted" className={styles.dropdownHeader}>
+              <Text variant="caption" color="muted" className={styles.dropdownHeader}>
                 Recent searches
               </Text>
               <ul className={styles.dropdownList}>
@@ -112,7 +112,7 @@ export function Header() {
                       type="button"
                     >
                       <Search size={14} />
-                      <Text variant="sm">{term}</Text>
+                      <Text variant="bodySm">{term}</Text>
                     </button>
                   </li>
                 ))}

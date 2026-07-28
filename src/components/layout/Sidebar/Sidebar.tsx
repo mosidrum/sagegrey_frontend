@@ -17,9 +17,9 @@ export function Sidebar() {
   return (
     <aside className={styles.sidebar}>
       <Box className={styles.header}>
-        <Flex align="center" gap="sm">
+        <Flex align="center" gap={2}>
           <Star size={18} />
-          <Text variant="md" weight="bold">
+          <Text variant="body" weight="bold">
             Favorites
           </Text>
         </Flex>
@@ -27,7 +27,7 @@ export function Sidebar() {
 
       {favorites.length === 0 ? (
         <Box className={styles.empty}>
-          <Text variant="sm" color="muted" align="center">
+          <Text variant="bodySm" color="muted" align="center">
             No favorites yet
           </Text>
         </Box>
@@ -39,7 +39,7 @@ export function Sidebar() {
                 href={`/characters/${character.id}`}
                 className={styles.link}
               >
-                <Text variant="sm" className={styles.name}>
+                <Text variant="bodySm" className={styles.name}>
                   {character.name}
                 </Text>
                 <Button
