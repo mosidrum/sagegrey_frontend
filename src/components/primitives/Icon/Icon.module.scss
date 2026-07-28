@@ -1,0 +1,39 @@
+.sm {
+  width: 16px;
+  height: 16px;
+}
+
+.md {
+  width: 20px;
+  height: 20px;
+}
+
+.lg {
+  width: 24px;
+  height: 24px;
+}
+
+.xl {
+  width: 32px;
+  height: 32px;
+}
+
+.color-primary {
+  color: var(--color-text-primary);
+}
+
+.color-muted {
+  color: var(--color-text-muted);
+}
+
+.color-accent {
+  color: var(--color-primary);
+}
+
+.color-danger {
+  color: var(--color-danger);
+}
+
+.color-inherit {
+  color: inherit;
+}
