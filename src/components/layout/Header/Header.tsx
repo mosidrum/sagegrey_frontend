@@ -3,7 +3,7 @@
 import { useDebounce } from "@/hooks/useDebounce";
 import { useSearchHistory } from "@/features/search/useSearchHistory";
 import { Box, Flex, Text } from "@/components/primitives";
-import { Search, X } from "lucide-react";
+import { Search, X, Moon, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { type ChangeEvent, type KeyboardEvent, useEffect, useRef, useState } from "react";
 import styles from "./Header.module.scss";
@@ -62,15 +62,21 @@ export function Header() {
   return (
     <header className={styles.header}>
       <Flex align="center" justify="between" className={styles.container}>
-        <Text
-          as="h1"
-          variant="h2"
-          weight="bold"
-          className={styles.logo}
-        >
-          SWAPI Explorer
-        </Text>
+        {/* Left: Star Wars Logo */}
+        <div className={styles.logoWrapper}>
+          <Text
+            as="div"
+            variant="display"
+            weight="bold"
+            className={styles.logo}
+          >
+            STAR
+            <br />
+            WARS
+          </Text>
+        </div>
 
+        {/* Center: Search Bar */}
         <div className={styles.searchWrapper}>
           <div className={styles.searchInputWrapper}>
             <Search className={styles.searchIcon} size={18} />
@@ -96,6 +102,7 @@ export function Header() {
                 <X size={16} />
               </button>
             )}
+            <span className={styles.searchHint}>/</span>
           </div>
 
           {showDropdown && (
@@ -120,6 +127,16 @@ export function Header() {
             </Box>
           )}
         </div>
+
+        {/* Right: Dark Mode Toggle + Avatar */}
+        <Flex align="center" gap={3}>
+          <button className={styles.iconButton} aria-label="Toggle dark mode">
+            <Moon size={20} />
+          </button>
+          <button className={styles.avatarButton} aria-label="User profile">
+            <User size={20} />
+          </button>
+        </Flex>
       </Flex>
     </header>
   );

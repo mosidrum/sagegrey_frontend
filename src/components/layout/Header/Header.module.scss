@@ -4,26 +4,37 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--color-surface);
+  background: var(--color-background);
   border-bottom: 1px solid var(--color-border);
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: var(--spacing-md) var(--spacing-lg);
+  padding: var(--spacing-4) var(--spacing-6);
+  gap: var(--spacing-6);
+}
+
+.logoWrapper {
+  flex-shrink: 0;
 }
 
 .logo {
-  color: var(--color-primary);
-  cursor: pointer;
+  color: #FFD700; /* Star Wars yellow */
+  line-height: 0.9;
+  letter-spacing: 0.05em;
+  font-size: 1.5rem;
+  text-transform: uppercase;
   user-select: none;
+  cursor: pointer;
+  font-weight: 900;
 }
 
 .searchWrapper {
   position: relative;
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
+  flex: 1;
 }
 
 .searchInputWrapper {
@@ -34,15 +45,16 @@
 
 .searchIcon {
   position: absolute;
-  left: var(--spacing-sm);
+  left: var(--spacing-3);
   color: var(--color-text-muted);
   pointer-events: none;
+  z-index: 1;
 }
 
 .searchInput {
   width: 100%;
-  padding: var(--spacing-sm) var(--spacing-xl) var(--spacing-sm) var(--spacing-xl);
-  background: var(--color-background);
+  padding: var(--spacing-2) var(--spacing-12) var(--spacing-2) var(--spacing-10);
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md, 8px);
   color: var(--color-text-primary);
@@ -60,13 +72,30 @@
   }
 }
 
-.clearButton {
+.searchHint {
   position: absolute;
-  right: var(--spacing-sm);
+  right: var(--spacing-3);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-xs);
+  width: 20px;
+  height: 20px;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  font-family: monospace;
+  pointer-events: none;
+}
+
+.clearButton {
+  position: absolute;
+  right: var(--spacing-8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-1);
   background: transparent;
   border: none;
   color: var(--color-text-muted);
@@ -78,9 +107,47 @@
   }
 }
 
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md, 8px);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: var(--color-text-primary);
+    background: var(--color-surface);
+  }
+}
+
+.avatarButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: var(--color-text-primary);
+    border-color: var(--color-primary);
+  }
+}
+
 .dropdown {
   position: absolute;
-  top: calc(100% + var(--spacing-xs));
+  top: calc(100% + var(--spacing-2));
   left: 0;
   right: 0;
   background: var(--color-surface);
@@ -88,12 +155,14 @@
   border-radius: var(--radius-md, 8px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   overflow: hidden;
+  z-index: 10;
 }
 
 .dropdownHeader {
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: var(--spacing-2) var(--spacing-3);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .dropdownList {
@@ -105,9 +174,9 @@
 .dropdownItem {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-2);
   width: 100%;
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: var(--spacing-2) var(--spacing-3);
   background: transparent;
   border: none;
   color: var(--color-text-primary);
@@ -121,5 +190,6 @@
 
   svg {
     color: var(--color-text-muted);
+    flex-shrink: 0;
   }
 }
