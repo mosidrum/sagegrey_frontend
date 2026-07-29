@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Exo_2 } from "next/font/google";
 import "@/styles/globals.scss";
 import { FavoritesProvider } from "@/features/favorites/FavoritesContext";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AppShell } from "@/components/layout/AppShell/AppShell";
 
 const exo2 = Exo_2({
@@ -23,9 +24,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={exo2.variable}>
       <body>
-        <FavoritesProvider>
-          <AppShell>{children}</AppShell>
-        </FavoritesProvider>
+        <ThemeProvider>
+          <FavoritesProvider>
+            <AppShell>{children}</AppShell>
+          </FavoritesProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
