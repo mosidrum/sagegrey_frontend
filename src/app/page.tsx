@@ -18,6 +18,7 @@ export default async function Home({ searchParams }: HomeProps) {
   try {
     data = await getPeople(currentPage);
   } catch (e) {
+    console.error("Failed to fetch characters:", e);
     error = e instanceof Error ? e.message : "Failed to load characters";
   }
 
@@ -27,9 +28,15 @@ export default async function Home({ searchParams }: HomeProps) {
         <Text variant="h1" weight="bold">
           All Characters
         </Text>
-        <Text variant="body" color="danger">
-          {error || "Failed to load characters"}
-        </Text>
+        <Box>
+          <Text variant="body" color="danger">
+            {error || "Failed to load characters"}
+          </Text>
+          <Text variant="bodySm" color="muted">
+            Please check your internet connection and try again. If the issue
+            persists, the Star Wars API (SWAPI) might be temporarily unavailable.
+          </Text>
+        </Box>
       </Stack>
     );
   }
