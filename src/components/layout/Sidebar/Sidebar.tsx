@@ -1,8 +1,8 @@
 "use client";
 
 import { useFavorites } from "@/features/favorites/useFavorites";
-import { Box, Button, Flex, Text } from "@/components/primitives";
-import { Star, X } from "lucide-react";
+import { Avatar, Box, Button, Text } from "@/components/primitives";
+import { X } from "lucide-react";
 import Link from "next/link";
 import styles from "./Sidebar.module.scss";
 
@@ -17,12 +17,9 @@ export function Sidebar() {
   return (
     <aside className={styles.sidebar}>
       <Box className={styles.header}>
-        <Flex align="center" gap={2}>
-          <Star size={18} />
-          <Text variant="body" weight="bold">
-            Favorites
-          </Text>
-        </Flex>
+        <Text variant="caption" className={styles.favoritesLabel}>
+          Favorites
+        </Text>
       </Box>
 
       {favorites.length === 0 ? (
@@ -39,6 +36,12 @@ export function Sidebar() {
                 href={`/characters/${character.id}`}
                 className={styles.link}
               >
+                <Avatar
+                  name={character.name}
+                  size="sm"
+                  shape="circle"
+                  className={styles.avatarThumb}
+                />
                 <Text variant="bodySm" className={styles.name}>
                   {character.name}
                 </Text>
@@ -56,6 +59,14 @@ export function Sidebar() {
           ))}
         </ul>
       )}
+
+      <Box className={styles.footer}>
+        <Link href="/favorites">
+          <Button variant="secondary" className={styles.viewAllButton}>
+            View all favorites
+          </Button>
+        </Link>
+      </Box>
     </aside>
   );
 }

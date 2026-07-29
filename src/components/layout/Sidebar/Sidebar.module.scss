@@ -14,10 +14,12 @@
   padding: var(--spacing-4) var(--spacing-6);
   border-bottom: 1px solid var(--color-border);
   flex-shrink: 0;
+}
 
-  svg {
-    color: var(--color-primary);
-  }
+.favoritesLabel {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
 }
 
 .empty {
@@ -59,6 +61,12 @@
   }
 }
 
+.avatarThumb {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
 .name {
   flex: 1;
   overflow: hidden;
@@ -74,4 +82,14 @@
   &:hover {
     opacity: 1;
   }
+}
+
+.footer {
+  padding: var(--spacing-4);
+  border-top: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.viewAllButton {
+  width: 100%;
 }
