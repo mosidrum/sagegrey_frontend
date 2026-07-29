@@ -1,8 +1,7 @@
 import { getPeople } from "@/lib/api/swapi";
-import { Box, Button, Flex, Stack, Text } from "@/components/primitives";
+import { Box, Stack, Text } from "@/components/primitives";
 import { CharacterList } from "@/features/characters/CharacterList";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import Link from "next/link";
+import { Pagination } from "@/features/characters/Pagination";
 
 interface HomeProps {
   searchParams?: Promise<{ page?: string }>;
@@ -41,9 +40,7 @@ export default async function Home({ searchParams }: HomeProps) {
     );
   }
 
-  const totalPages = Math.ceil(data.count / 10);
-  const hasPrev = currentPage > 1;
-  const hasNext = currentPage < totalPages;
+  const totalPages = Math.max(1, Math.ceil(data.count / 10));
 
   return (
     <Stack gap={6}>
@@ -58,33 +55,9 @@ export default async function Home({ searchParams }: HomeProps) {
 
       <CharacterList people={data.results} />
 
-      <Flex justify="between" align="center">
-        {hasPrev ? (
-          <Link href={`/?page=${currentPage - 1}`}>
-            <Button variant="secondary" icon={ChevronLeft} iconPosition="left">
-              Previous
-            </Button>
-          </Link>
-        ) : (
-          <Box />
-        )}
-
-        <Flex gap={2} align="center">
-          <Text variant="bodySm" color="muted">
-            Page {currentPage} of {totalPages}
-          </Text>
-        </Flex>
-
-        {hasNext ? (
-          <Link href={`/?page=${currentPage + 1}`}>
-            <Button variant="secondary" icon={ChevronRight} iconPosition="right">
-              Next
-            </Button>
-          </Link>
-        ) : (
-          <Box />
-        )}
-      </Flex>
+      {totalPages > 1 && (
+        <Pagination currentPage={currentPage} totalPages={totalPages} basePath="/" />
+      )}
     </Stack>
   );
 }
