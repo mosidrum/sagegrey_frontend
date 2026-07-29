@@ -61,8 +61,12 @@ export function FavoritesProvider({ children }: FavoritesProviderProps) {
   const [favorites, setFavorites] = useState<FavoriteCharacter[]>([]);
   const [isHydrated, setIsHydrated] = useState(false);
 
-  // Load from localStorage only on client after hydration
+  // Load from localStorage only on client after hydration (state must start
+  // empty to match the server-rendered markup, so this sync-after-mount
+  // pattern is intentional rather than the fetch-then-setState anti-pattern
+  // the lint rule normally targets).
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setFavorites(loadFavoritesFromStorage());
     setIsHydrated(true);
   }, []);
