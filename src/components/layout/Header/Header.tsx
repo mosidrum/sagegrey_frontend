@@ -49,11 +49,6 @@ export function Header() {
     inputRef.current?.focus();
   };
 
-  const handleClear = () => {
-    setSearchValue("");
-    inputRef.current?.focus();
-  };
-
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Escape") {
       setSearchValue("");
@@ -61,14 +56,21 @@ export function Header() {
     }
   };
 
-  const handleRemoveTerm = (term: string, e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent the item click handler from firing
+  const handleRemoveTerm = (term: string) => {
     removeTerm(term);
   };
 
-  const handleClearAll = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handleClearAll = () => {
     clearHistory();
+  };
+
+  // Dropdown visibility is driven solely by the input's focus state. Clicks
+  // inside the dropdown (history item, remove, clear all) must not blur the
+  // input, or the dropdown would close before the click handler's effect
+  // is visible. preventDefault on mousedown stops the blur from firing at
+  // all, so the dropdown stays open for anything but leaving the input.
+  const preventBlur = (e: React.MouseEvent) => {
+    e.preventDefault();
   };
 
   return (
@@ -104,16 +106,6 @@ export function Header() {
               className={styles.searchInput}
               aria-label="Search Star Wars characters"
             />
-            {searchValue && (
-              <button
-                onClick={handleClear}
-                className={styles.clearButton}
-                aria-label="Clear search"
-                type="button"
-              >
-                <X size={16} />
-              </button>
-            )}
             <span className={styles.searchHint}>/</span>
           </div>
 
@@ -125,6 +117,7 @@ export function Header() {
                 </Text>
                 <button
                   onClick={handleClearAll}
+                  onMouseDown={preventBlur}
                   className={styles.clearAllButton}
                   type="button"
                 >
@@ -135,24 +128,26 @@ export function Header() {
               </Flex>
               <ul className={styles.dropdownList}>
                 {history.map((term, index) => (
-                  <li key={index}>
+                  <li key={index} className={styles.dropdownItem}>
                     <button
                       onClick={() => handleHistoryItemClick(term)}
-                      className={styles.dropdownItem}
+                      onMouseDown={preventBlur}
+                      className={styles.dropdownItemButton}
                       type="button"
                     >
                       <Flex align="center" gap={2} className={styles.dropdownItemContent}>
                         <Clock size={14} />
                         <Text variant="bodySm">{term}</Text>
                       </Flex>
-                      <button
-                        onClick={(e) => handleRemoveTerm(term, e)}
-                        className={styles.removeButton}
-                        aria-label={`Remove ${term}`}
-                        type="button"
-                      >
-                        <X size={14} />
-                      </button>
+                    </button>
+                    <button
+                      onClick={() => handleRemoveTerm(term)}
+                      onMouseDown={preventBlur}
+                      className={styles.removeButton}
+                      aria-label={`Remove ${term}`}
+                      type="button"
+                    >
+                      <X size={14} />
                     </button>
                   </li>
                 ))}
