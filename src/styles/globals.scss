@@ -32,12 +32,24 @@
   --color-avatar-8: #85C1E2;
 }
 
+// Light theme overrides
+[data-theme="light"] {
+  @each $name, $value in tokens.$colors-light {
+    --color-#{$name}: #{$value};
+  }
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html {
+  // Smooth transition for theme changes
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 html,
@@ -51,6 +63,7 @@ body {
   font-family: var(--font-family-base);
   font-size: var(--font-size-base);
   line-height: var(--line-height-normal);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 ul,

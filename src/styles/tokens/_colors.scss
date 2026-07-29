@@ -1,3 +1,4 @@
+// Dark theme colors (default)
 $colors: (
   background: #0d1117,
   surface: #161b22,
@@ -7,4 +8,16 @@ $colors: (
   text-muted: #8b949e,
   border: #2b3138,
   danger: #e5484d,
+);
+
+// Light theme colors
+$colors-light: (
+  background: #ffffff,
+  surface: #f6f8fa,
+  primary: #d4a438,
+  secondary: #0969da,
+  text-primary: #1f2328,
+  text-muted: #656d76,
+  border: #d0d7de,
+  danger: #d1242f,
 );
