@@ -11,7 +11,7 @@ import styles from "./Header.module.scss";
 
 export function Header() {
   const router = useRouter();
-  const { history, addTerm } = useSearchHistory();
+  const { history, addTerm, removeTerm, clearHistory } = useSearchHistory();
   const { theme, toggleTheme } = useTheme();
   const [searchValue, setSearchValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
@@ -59,6 +59,16 @@ export function Header() {
       setSearchValue("");
       inputRef.current?.blur();
     }
+  };
+
+  const handleRemoveTerm = (term: string, e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent the item click handler from firing
+    removeTerm(term);
+  };
+
+  const handleClearAll = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    clearHistory();
   };
 
   return (
@@ -109,9 +119,20 @@ export function Header() {
 
           {showDropdown && (
             <Box className={styles.dropdown}>
-              <Text variant="caption" color="muted" className={styles.dropdownHeader}>
-                Recent searches
-              </Text>
+              <Flex justify="between" align="center" className={styles.dropdownHeader}>
+                <Text variant="caption" color="muted">
+                  Recent searches
+                </Text>
+                <button
+                  onClick={handleClearAll}
+                  className={styles.clearAllButton}
+                  type="button"
+                >
+                  <Text variant="caption" color="muted">
+                    Clear all
+                  </Text>
+                </button>
+              </Flex>
               <ul className={styles.dropdownList}>
                 {history.map((term, index) => (
                   <li key={index}>
@@ -120,8 +141,18 @@ export function Header() {
                       className={styles.dropdownItem}
                       type="button"
                     >
-                      <Text variant="bodySm">{term}</Text>
-                      <Clock size={14} />
+                      <Flex align="center" gap={2} className={styles.dropdownItemContent}>
+                        <Clock size={14} />
+                        <Text variant="bodySm">{term}</Text>
+                      </Flex>
+                      <button
+                        onClick={(e) => handleRemoveTerm(term, e)}
+                        className={styles.removeButton}
+                        aria-label={`Remove ${term}`}
+                        type="button"
+                      >
+                        <X size={14} />
+                      </button>
                     </button>
                   </li>
                 ))}
