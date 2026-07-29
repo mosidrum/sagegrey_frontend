@@ -11,7 +11,7 @@
 }
 
 .header {
-  padding: var(--spacing-md) var(--spacing-lg);
+  padding: var(--spacing-4) var(--spacing-6);
   border-bottom: 1px solid var(--color-border);
   flex-shrink: 0;
 
@@ -21,7 +21,7 @@
 }
 
 .empty {
-  padding: var(--spacing-xl) var(--spacing-md);
+  padding: var(--spacing-8) var(--spacing-4);
   flex: 1;
   display: flex;
   align-items: center;
@@ -48,8 +48,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-md) var(--spacing-lg);
+  gap: var(--spacing-2);
+  padding: var(--spacing-4) var(--spacing-6);
   text-decoration: none;
   color: var(--color-text-primary);
   transition: background-color 0.2s ease;

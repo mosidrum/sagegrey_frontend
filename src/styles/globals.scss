@@ -16,6 +16,9 @@
   @each $key, $value in tokens.$spacing {
     --spacing-#{$key}: #{$value};
   }
+  @each $name, $value in tokens.$radii {
+    --radius-#{$name}: #{$value};
+  }
   --font-family-base: var(--font-exo2), #{tokens.$font-family-fallback};
   
   // Avatar colors for character initials
