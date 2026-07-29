@@ -2,8 +2,9 @@
 
 import { useDebounce } from "@/hooks/useDebounce";
 import { useSearchHistory } from "@/features/search/useSearchHistory";
+import { useTheme } from "@/contexts/ThemeContext";
 import { Box, Flex, Text } from "@/components/primitives";
-import { Clock, Search, X, Moon, User } from "lucide-react";
+import { Clock, Search, X, Moon, Sun, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { type ChangeEvent, type KeyboardEvent, useEffect, useRef, useState } from "react";
 import styles from "./Header.module.scss";
@@ -11,6 +12,7 @@ import styles from "./Header.module.scss";
 export function Header() {
   const router = useRouter();
   const { history, addTerm } = useSearchHistory();
+  const { theme, toggleTheme } = useTheme();
   const [searchValue, setSearchValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const debouncedSearch = useDebounce(searchValue, 300);
@@ -130,8 +132,12 @@ export function Header() {
 
         {/* Right: Dark Mode Toggle + Avatar */}
         <Flex align="center" gap={3}>
-          <button className={styles.iconButton} aria-label="Toggle dark mode">
-            <Moon size={20} />
+          <button 
+            className={styles.iconButton} 
+            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+            onClick={toggleTheme}
+          >
+            {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
           </button>
           <button className={styles.avatarButton} aria-label="User profile">
             <User size={20} />
