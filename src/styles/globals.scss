@@ -17,6 +17,16 @@
     --spacing-#{$key}: #{$value};
   }
   --font-family-base: var(--font-exo2), #{tokens.$font-family-fallback};
+  
+  // Avatar colors for character initials
+  --color-avatar-1: #FF6B6B;
+  --color-avatar-2: #4ECDC4;
+  --color-avatar-3: #45B7D1;
+  --color-avatar-4: #FFA07A;
+  --color-avatar-5: #98D8C8;
+  --color-avatar-6: #F7DC6F;
+  --color-avatar-7: #BB8FCE;
+  --color-avatar-8: #85C1E2;
 }
 
 *,
