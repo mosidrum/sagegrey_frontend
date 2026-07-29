@@ -1,0 +1,67 @@
+@use "@/styles/tokens" as *;
+
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  align-items: flex-start;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.avatarContainer {
+  position: relative;
+  width: 400px;
+  height: 533px; // 3:4 aspect ratio
+  flex-shrink: 0;
+  border-radius: var(--radius-lg, 12px);
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+  }
+}
+
+.headerContent {
+  flex: 1;
+}
+
+.detailRow {
+  padding: var(--spacing-3) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.detailValue {
+  text-transform: capitalize;
+}
+
+.filmsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--spacing-4);
+  margin-top: var(--spacing-4);
+}
+
+.filmCard {
+  padding: var(--spacing-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md, 8px);
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+}
