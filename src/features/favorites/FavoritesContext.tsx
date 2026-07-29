@@ -57,15 +57,22 @@ export interface FavoritesProviderProps {
 }
 
 export function FavoritesProvider({ children }: FavoritesProviderProps) {
-  // Lazy initialization: only runs once on mount, SSR-safe
-  const [favorites, setFavorites] = useState<FavoriteCharacter[]>(
-    loadFavoritesFromStorage,
-  );
+  // Start with empty array to match SSR
+  const [favorites, setFavorites] = useState<FavoriteCharacter[]>([]);
+  const [isHydrated, setIsHydrated] = useState(false);
 
-  // Persist to localStorage whenever favorites change
+  // Load from localStorage only on client after hydration
   useEffect(() => {
-    saveFavoritesToStorage(favorites);
-  }, [favorites]);
+    setFavorites(loadFavoritesFromStorage());
+    setIsHydrated(true);
+  }, []);
+
+  // Persist to localStorage whenever favorites change (but only after hydration)
+  useEffect(() => {
+    if (isHydrated) {
+      saveFavoritesToStorage(favorites);
+    }
+  }, [favorites, isHydrated]);
 
   const addFavorite = (character: FavoriteCharacter) => {
     setFavorites((prev) => {
