@@ -30,10 +30,11 @@ export async function getPersonById(id: string): Promise<Person> {
  */
 export async function searchPeople(
   query: string,
+  page: number = 1,
 ): Promise<PaginatedResponse<Person>> {
   const encodedQuery = encodeURIComponent(query);
   return fetchJson<PaginatedResponse<Person>>(
-    `${SWAPI_BASE_URL}/people/?search=${encodedQuery}`,
+    `${SWAPI_BASE_URL}/people/?search=${encodedQuery}&page=${page}`,
   );
 }
 
