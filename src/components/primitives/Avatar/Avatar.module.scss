@@ -1,0 +1,36 @@
+@use "@/styles/tokens" as *;
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm, 4px);
+  color: white;
+  font-weight: 600;
+  user-select: none;
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.initials {
+  font-size: inherit;
+  line-height: 1;
+}
+
+// Size variants
+.sm {
+  font-size: var(--font-size-sm, 14px);
+}
+
+.md {
+  font-size: var(--font-size-lg, 18px);
+}
+
+.lg {
+  font-size: var(--font-size-xl, 24px);
+}
+
+.xl {
+  font-size: var(--font-size-2xl, 32px);
+}

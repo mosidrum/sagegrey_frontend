@@ -1,3 +1,4 @@
+export { Avatar, type AvatarProps } from "./Avatar/Avatar";
 export { Box, type BoxProps } from "./Box/Box";
 export { Flex, type FlexProps, type FlexDirection, type FlexAlign, type FlexJustify } from "./Flex/Flex";
 export { Stack, type StackProps } from "./Stack/Stack";
