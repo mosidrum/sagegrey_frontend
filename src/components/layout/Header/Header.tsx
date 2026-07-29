@@ -3,7 +3,7 @@
 import { useDebounce } from "@/hooks/useDebounce";
 import { useSearchHistory } from "@/features/search/useSearchHistory";
 import { Box, Flex, Text } from "@/components/primitives";
-import { Search, X, Moon, User } from "lucide-react";
+import { Clock, Search, X, Moon, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { type ChangeEvent, type KeyboardEvent, useEffect, useRef, useState } from "react";
 import styles from "./Header.module.scss";
@@ -118,8 +118,8 @@ export function Header() {
                       className={styles.dropdownItem}
                       type="button"
                     >
-                      <Search size={14} />
                       <Text variant="bodySm">{term}</Text>
+                      <Clock size={14} />
                     </button>
                   </li>
                 ))}
