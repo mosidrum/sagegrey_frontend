@@ -1,6 +1,12 @@
-import { getPersonById, getFilmsByUrls } from "@/lib/api/swapi";
+import {
+  getPersonById,
+  getFilmsByUrls,
+  getVehiclesByUrls,
+  getStarshipsByUrls,
+} from "@/lib/api/swapi";
 import { Avatar, Box, Stack, Text, Flex, Button } from "@/components/primitives";
 import { FavoriteButton } from "@/features/characters/FavoriteButton";
+import { getAvatarColor } from "@/lib/utils/colorHash";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
@@ -15,10 +21,14 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
 
   let person;
   let films;
+  let vehicles;
+  let starships;
 
   try {
     person = await getPersonById(id);
     films = person.films.length > 0 ? await getFilmsByUrls(person.films) : [];
+    vehicles = person.vehicles.length > 0 ? await getVehiclesByUrls(person.vehicles) : [];
+    starships = person.starships.length > 0 ? await getStarshipsByUrls(person.starships) : [];
   } catch (error) {
     console.error("Error fetching character:", error);
     notFound();
@@ -67,23 +77,60 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
         {films.length > 0 && (
           <Box>
             <Text variant="h2" weight="bold" as="h2">
-              Featured In
+              Films
             </Text>
             <Box className={styles.filmsGrid}>
               {films.map((film) => (
                 <Box key={film.url} className={styles.filmCard}>
-                  <Text variant="body" weight="semibold">
-                    Episode {film.episode_id}
-                  </Text>
-                  <Text variant="h3" weight="bold">
+                  <Box
+                    className={styles.filmPoster}
+                    style={{ background: getAvatarColor(film.title) }}
+                  >
+                    <Text variant="h3" weight="bold">
+                      {film.title.charAt(0)}
+                    </Text>
+                  </Box>
+                  <Text variant="bodySm" weight="semibold">
                     {film.title}
                   </Text>
-                  <Text variant="bodySm" color="muted">
-                    {film.release_date}
+                  <Text variant="caption" color="muted">
+                    Episode {film.episode_id}
                   </Text>
                 </Box>
               ))}
             </Box>
+          </Box>
+        )}
+
+        {/* Vehicles section */}
+        {vehicles.length > 0 && (
+          <Box>
+            <Text variant="h2" weight="bold" as="h2">
+              Vehicles
+            </Text>
+            <Flex gap={2} className={styles.chipRow}>
+              {vehicles.map((vehicle) => (
+                <span key={vehicle.url} className={styles.chip}>
+                  {vehicle.name}
+                </span>
+              ))}
+            </Flex>
+          </Box>
+        )}
+
+        {/* Starships section */}
+        {starships.length > 0 && (
+          <Box>
+            <Text variant="h2" weight="bold" as="h2">
+              Starships
+            </Text>
+            <Flex gap={2} className={styles.chipRow}>
+              {starships.map((starship) => (
+                <span key={starship.url} className={styles.chip}>
+                  {starship.name}
+                </span>
+              ))}
+            </Flex>
           </Box>
         )}
       </Stack>

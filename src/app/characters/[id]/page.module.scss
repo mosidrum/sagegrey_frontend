@@ -65,3 +65,28 @@
     transform: translateY(-2px);
   }
 }
+
+.filmPoster {
+  aspect-ratio: 2 / 3;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  margin-bottom: var(--spacing-2);
+}
+
+.chipRow {
+  flex-wrap: wrap;
+  margin-top: var(--spacing-3);
+}
+
+.chip {
+  padding: var(--spacing-1) var(--spacing-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  white-space: nowrap;
+}

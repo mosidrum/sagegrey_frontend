@@ -2,7 +2,7 @@
  * SWAPI data layer - pure, fully-typed API functions
  */
 
-import type { Film, PaginatedResponse, Person } from "@/types/swapi";
+import type { Film, PaginatedResponse, Person, Starship, Vehicle } from "@/types/swapi";
 import { fetchJson } from "./client";
 
 const SWAPI_BASE_URL = "https://swapi.py4e.com/api";
@@ -44,4 +44,18 @@ export async function searchPeople(
 export async function getFilmsByUrls(urls: string[]): Promise<Film[]> {
   const filmPromises = urls.map((url) => fetchJson<Film>(url));
   return Promise.all(filmPromises);
+}
+
+/**
+ * Resolve multiple vehicle URLs in parallel
+ */
+export async function getVehiclesByUrls(urls: string[]): Promise<Vehicle[]> {
+  return Promise.all(urls.map((url) => fetchJson<Vehicle>(url)));
+}
+
+/**
+ * Resolve multiple starship URLs in parallel
+ */
+export async function getStarshipsByUrls(urls: string[]): Promise<Starship[]> {
+  return Promise.all(urls.map((url) => fetchJson<Starship>(url)));
 }

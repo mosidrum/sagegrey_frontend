@@ -38,6 +38,16 @@ export interface Film {
   url: string;
 }
 
+export interface Vehicle {
+  name: string;
+  url: string;
+}
+
+export interface Starship {
+  name: string;
+  url: string;
+}
+
 export interface PaginatedResponse<T> {
   count: number;
   next: string | null;
