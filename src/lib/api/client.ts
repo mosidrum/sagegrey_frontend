@@ -14,15 +14,32 @@ export class ApiError extends Error {
 }
 
 export async function fetchJson<T>(url: string): Promise<T> {
-  const response = await fetch(url);
+  try {
+    const response = await fetch(url, {
+      cache: "no-store", // Disable caching to avoid stale data issues
+      next: { revalidate: 0 }, // Force fresh data on each request
+    });
 
-  if (!response.ok) {
+    if (!response.ok) {
+      throw new ApiError(
+        `HTTP error: ${response.status} ${response.statusText}`,
+        response.status,
+        response.statusText,
+      );
+    }
+
+    return response.json() as Promise<T>;
+  } catch (error) {
+    // Handle network errors or JSON parsing errors
+    if (error instanceof ApiError) {
+      throw error;
+    }
+    
+    // Network or other fetch errors
     throw new ApiError(
-      `HTTP error: ${response.status} ${response.statusText}`,
-      response.status,
-      response.statusText,
+      error instanceof Error ? error.message : "Failed to fetch data",
+      0,
+      "Network Error",
     );
   }
-
-  return response.json() as Promise<T>;
 }

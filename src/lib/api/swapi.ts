@@ -5,7 +5,7 @@
 import type { Film, PaginatedResponse, Person } from "@/types/swapi";
 import { fetchJson } from "./client";
 
-const SWAPI_BASE_URL = "https://swapi.dev/api";
+const SWAPI_BASE_URL = "https://swapi.py4e.com/api";
 
 /**
  * Get a paginated list of people
