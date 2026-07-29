@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const STORAGE_KEY = "swapi:search-history";
 const MAX_HISTORY_SIZE = 8;
@@ -43,7 +43,7 @@ export function useSearchHistory() {
     saveHistoryToStorage(history);
   }, [history]);
 
-  const addTerm = (term: string) => {
+  const addTerm = useCallback((term: string) => {
     const trimmed = term.trim();
     if (!trimmed) {
       return;
@@ -57,15 +57,20 @@ export function useSearchHistory() {
       // Cap at MAX_HISTORY_SIZE
       return updated.slice(0, MAX_HISTORY_SIZE);
     });
-  };
+  }, []);
 
-  const clearHistory = () => {
+  const removeTerm = useCallback((term: string) => {
+    setHistory((prev) => prev.filter((t) => t !== term));
+  }, []);
+
+  const clearHistory = useCallback(() => {
     setHistory([]);
-  };
+  }, []);
 
   return {
     history,
     addTerm,
+    removeTerm,
     clearHistory,
   };
 }
