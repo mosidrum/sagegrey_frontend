@@ -4,7 +4,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-sm, 4px);
   color: white;
   font-weight: 600;
   user-select: none;
@@ -18,19 +17,32 @@
   line-height: 1;
 }
 
+// Shape variants
+.circle {
+  border-radius: 50%;
+}
+
+.square {
+  border-radius: var(--radius-sm);
+}
+
 // Size variants
-.sm {
+.size-sm {
   font-size: var(--font-size-sm, 14px);
 }
 
-.md {
+.size-md {
   font-size: var(--font-size-lg, 18px);
 }
 
-.lg {
+.size-lg {
   font-size: var(--font-size-xl, 24px);
 }
 
-.xl {
+.size-xl {
   font-size: var(--font-size-xl);
+}
+
+.size-2xl {
+  font-size: 4.5rem;
 }

@@ -39,7 +39,7 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
         {/* Header with avatar and basic info */}
         <Flex className={styles.header} gap={6}>
           <Box className={styles.avatarContainer}>
-            <Avatar name={person.name} size="xl" />
+            <Avatar name={person.name} size="2xl" />
           </Box>
 
           <Stack gap={4} className={styles.headerContent}>
