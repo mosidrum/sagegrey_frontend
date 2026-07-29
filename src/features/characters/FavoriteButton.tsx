@@ -23,7 +23,7 @@ export function FavoriteButton({ characterId, characterName }: FavoriteButtonPro
 
   return (
     <Button
-      variant={favorited ? "primary" : "secondary"}
+      variant={favorited ? "outline" : "secondary"}
       icon={Star}
       iconPosition="left"
       onClick={handleClick}

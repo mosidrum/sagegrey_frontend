@@ -74,6 +74,16 @@
   }
 }
 
+.outline {
+  background: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+
+  &:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  }
+}
+
 .danger {
   color: var(--color-danger);
   border-color: var(--color-danger);

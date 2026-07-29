@@ -4,7 +4,7 @@ import { cx } from "../internal/cx";
 import { Icon } from "../Icon/Icon";
 import styles from "./Button.module.scss";
 
-export type ButtonVariant = "primary" | "secondary" | "ghost" | "icon";
+export type ButtonVariant = "primary" | "secondary" | "ghost" | "icon" | "outline";
 export type ButtonSize = "sm" | "md" | "lg";
 
 export interface ButtonProps {
