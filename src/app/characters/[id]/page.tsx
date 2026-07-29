@@ -37,16 +37,14 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
   return (
     <div className={styles.page}>
       <Stack gap={6}>
-        {/* Back button */}
         <Box>
           <Link href="/">
-            <Button variant="secondary" icon={ArrowLeft} iconPosition="left">
+            <Button variant="primary" icon={ArrowLeft} iconPosition="left">
               Back to All Characters
             </Button>
           </Link>
         </Box>
 
-        {/* Header with avatar and basic info */}
         <Flex className={styles.header} gap={6}>
           <Box className={styles.avatarContainer}>
             <Avatar name={person.name} size="2xl" />

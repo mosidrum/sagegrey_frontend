@@ -62,7 +62,7 @@ export function Sidebar() {
 
       <Box className={styles.footer}>
         <Link href="/favorites">
-          <Button variant="secondary" className={styles.viewAllButton}>
+          <Button variant="primary" className={styles.viewAllButton}>
             View all favorites
           </Button>
         </Link>

@@ -43,7 +43,7 @@ export default async function Home({ searchParams }: HomeProps) {
   const totalPages = Math.max(1, Math.ceil(data.count / 10));
 
   return (
-    <Stack gap={6}>
+    <Stack gap={6} >
       <Box>
         <Text variant="h1" weight="bold">
           All Characters
