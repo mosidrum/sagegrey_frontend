@@ -1,5 +1,9 @@
+"use client";
+
 import type { Person } from "@/types/swapi";
-import { Box, Text } from "@/components/primitives";
+import { Avatar, Box, Text } from "@/components/primitives";
+import { useFavorites } from "@/features/favorites/useFavorites";
+import { Star } from "lucide-react";
 import Link from "next/link";
 import styles from "./CharacterList.module.scss";
 
@@ -13,25 +17,37 @@ function extractIdFromUrl(url: string): string {
 }
 
 export function CharacterList({ people }: CharacterListProps) {
+  const { isFavorite } = useFavorites();
+
   return (
     <div className={styles.grid}>
       {people.map((person) => {
         const id = extractIdFromUrl(person.url);
+        const favorited = isFavorite(id);
+        
         return (
           <Link
             key={person.url}
             href={`/characters/${id}`}
             className={styles.card}
           >
-            <Box className={styles.imageWrapper}>
-              <div className={styles.imagePlaceholder}>
-                <Text variant="h3" color="muted" align="center">
-                  {person.name.charAt(0)}
-                </Text>
-              </div>
+            <Box className={styles.avatarWrapper}>
+              <Avatar name={person.name} size="xl" />
             </Box>
             <Box className={styles.cardContent}>
               <Text variant="body" weight="medium" align="center">
+                {favorited && (
+                  <Star
+                    size={16}
+                    fill="currentColor"
+                    style={{ 
+                      display: "inline", 
+                      marginRight: "6px", 
+                      verticalAlign: "middle",
+                      color: "#fbbf24"
+                    }}
+                  />
+                )}
                 {person.name}
               </Text>
             </Box>
