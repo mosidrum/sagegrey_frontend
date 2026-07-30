@@ -18,5 +18,3 @@ Open [http://localhost:3000](http://localhost:3000).
 - `npm run start` – run the production build
 - `npm run lint` – lint the codebase
 - `npm test` – run Jest unit tests
-- `npm run cy:open` – open Cypress interactively
-- `npm run cy:run` – run Cypress e2e tests headlessly
